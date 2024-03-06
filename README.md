@@ -26,10 +26,17 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## Installation
+## Instalar todas las librerias
 
 ```bash
 $ npm install
+```
+## Instalar librerias de forma manual
+
+```bash
+$ npm install class-validator class-transformer --save
+$ npm install @nestjs/config --save-dev
+$ npm install @nestjs/typeorm typeorm mysql2
 ```
 
 ## Running the app
