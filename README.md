@@ -57,7 +57,7 @@ import configuration from './config/configuration';
   providers: [],
 })
 export class AppModule {}
-
+```
 4. Configura el archivo main.ts para incluir validaciones y el puerto de escucha:
 
 ```typescript
@@ -77,3 +77,4 @@ async function bootstrap() {
   console.log(`Corriendo en el puerto: ${port}`);
 }
 bootstrap();
+```
