@@ -28,13 +28,50 @@
 
 Este repositorio contiene un proyecto NestJS que incluye configuración para variables de entorno, conexión con una base de datos MySQL, y la creación de un módulo completo para manejar libros. Sigue las instrucciones a continuación para configurar y ejecutar el proyecto.
 
-## 1) Instalación de Módulos
+1) Instalación de Módulos
 
 ```bash
 $ npm install class-validator class-transformer --save
 $ npm install @nestjs/config --save-dev
 $ npm install @nestjs/typeorm typeorm mysql2
 ```
-## 2)crear los archivos de src/config   y src/common
-## 3)configurar las varaibles de entorno .env
-## 4)importar en app.modules.ts
+1. Crea copea los archivos y directorios `src/config` y `src/common` en la raíz de tu proyecto.
+2. Configura las variables de entorno en un archivo `.env` en la raíz de tu proyecto.
+3. Importa las configuraciones en `app.module.ts` de la siguiente manera:
+   ```typescript
+import { ConfigModule } from '@nestjs/config';
+import { DatabaseModule } from './config/database.module';
+import configuration from './config/configuration';
+
+@Module({
+  imports: [
+    ConfigModule.forRoot({
+      load: [configuration],
+      isGlobal: true,
+    }),
+    DatabaseModule,
+  ],
+  controllers: [],
+  providers: [],
+})
+export class AppModule {}
+
+4. Configura el archivo main.ts para incluir validaciones y el puerto de escucha:
+
+```typescript
+
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
+import { ConfigService } from '@nestjs/config';
+import { ValidationPipe } from '@nestjs/common';
+
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  const port = app.get(ConfigService).get<number>('config.port');
+
+  //validacion
+  app.useGlobalPipes(new ValidationPipe());
+  await app.listen(port);
+  console.log(`Corriendo en el puerto: ${port}`);
+}
+bootstrap();
