@@ -78,3 +78,32 @@ async function bootstrap() {
 }
 bootstrap();
 ```
+5. Creación de Módulos   
+<p> Para agregar un nuevo módulo a tu aplicación, como un módulo para manejar libros, utiliza el siguiente comando CLI de NestJS: (rest api/yes)</p>
+<p>ejemplo:</p>
+  
+```bash
+nest g resource modules/libros --no-spec
+```
+
+6. cambiar id: String a id: number  (controlador)
+7. implementar DTO (src/modules/libros/dto/create.libro.dto.ts) ejemplo:
+   
+```typescript
+import { noVacio,maximo } from "src/common/validaciones.dto";
+
+export class CreateLibroDto {
+    @noVacio('titulo')
+    @maximo(20, 'titulo')
+    titulo: string;
+
+    @noVacio('editorial')
+    @maximo(50, 'editorial')
+    editorial: string;
+
+    @noVacio('autor')
+    @maximo(50, 'autor')
+    autor: string;
+}
+```
+8. implementar los servicios
