@@ -38,7 +38,9 @@ $ npm install @nestjs/typeorm typeorm mysql2
 1. Crea copea los archivos y directorios `src/config` y `src/common` en la raíz de tu proyecto.
 2. Configura las variables de entorno en un archivo `.env` en la raíz de tu proyecto.
 3. Importa las configuraciones en `app.module.ts` de la siguiente manera:
-   ```typescript
+   
+```typescript
+   
 import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './config/database.module';
 import configuration from './config/configuration';
